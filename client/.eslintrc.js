@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": "eslint-config-airbnb",
   "parser": "babel-eslint",
   "plugins": [
@@ -47,4 +47,4 @@
 
     "babel/object-shorthand": 1
   }
-}
+};
