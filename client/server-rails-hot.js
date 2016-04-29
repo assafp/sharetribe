@@ -1,4 +1,5 @@
-/* eslint no-var: 0, no-console: 0 */
+/*eslint-env node */
+/* eslint no-console: 0 */
 
 // This file is used by the npm script:
 // "hot-assets": "babel-node server-rails-hot.js"
