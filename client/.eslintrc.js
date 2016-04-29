@@ -118,7 +118,12 @@ module.exports = {
     'no-use-before-define': 2,
 
     // ESLint built-in 'Stylistic Issues' rules
-    // TODO
+    'array-bracket-spacing': 2,
+    'block-spacing': 2,
+    'brace-style': 2,
+    'camelcase': 0, // TODO: decide what to do with this
+    'comma-spacing': 2,
+    // TODO: continue here
 
 
 
