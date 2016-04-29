@@ -1,50 +1,140 @@
 module.exports = {
-  "extends": "eslint-config-airbnb",
-  "parser": "babel-eslint",
-  "plugins": [
-    "babel",
-    "react"
+
+  // This makes sure ESLint doesn't traverse the directory tree
+  // upwards to find more .eslintrc.* files outside the project
+  // directory that might affect the linting results.
+  root: true,
+
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
   ],
-  "globals": {
-    "__DEBUG_SERVER_ERRORS__": true,
-    "__SERVER_ERRORS__": true
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    impliedStrict: true,
+    jsx: true,
+    experimentalObjectRestSpread: true,
   },
-  "env": {
-    "browser": true,
-    "node": true,
-    "mocha": true
+  plugins: [
+    'react',
+    'babel',
+    'import',
+    'jsx-a11y',
+  ],
+  env: {
+    browser: true,
+    es6: true,
   },
-  "rules": {
-    "eqeqeq": [2, "allow-null"],
+  rules: {
+    // See http://eslint.org/docs/rules/ for documentation for
+    // specific rules and their options.
+    //
+    // 0 = off
+    // 1 = warn
+    // 2 = error
 
-    "no-undef": 2,
-    "no-unused-vars": [2, { "vars": "all", "args": "none" }],
+    // ESLint built-in 'Possible Errors' rules
+    'comma-dangle': [2, 'always-multiline'],
 
-    "indent": [1, 2, { "SwitchCase": 1, "VariableDeclarator": 2 }],
-    "id-length": [1, { "min": 2, "exceptions": ["_", "e", "i", "k", "v", "t"] }],
 
-    "jsx-quotes": [1, "prefer-double"],
-    "react/display-name": 0,
-    "react/jsx-boolean-value": [1, "always"],
-    "react/jsx-curly-spacing": [1, "never"],
-    "react/jsx-no-duplicate-props": [2, { "ignoreCase": true }],
-    "react/jsx-no-undef": 2,
-    "react/jsx-sort-prop-types": 0,
-    "react/jsx-sort-props": 0,
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/no-danger": 0,
-    "react/no-did-mount-set-state": 1,
-    "react/no-did-update-set-state": 0,
-    "react/no-multi-comp": 2,
-    "react/no-unknown-property": 2,
-    "react/prop-types": 1,
-    "react/react-in-jsx-scope": 2,
-    "react/require-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/self-closing-comp": 2,
-    "react/sort-comp": 0,
-    "react/wrap-multilines": 2,
+    // ESLint built-in 'Best Practices' rules
+    'array-callback-return': 2,
+    'consistent-return': 2,
+    'curly': [2, 'all'],
+    'default-case': 2,
+    'dot-location': [2, 'property'],
+    'dot-notation': 2,
+    'eqeqeq': [2, 'smart'],
+    'guard-for-in': 2,
+    'no-alert': 2,
+    'no-caller': 2,
+    'no-case-declarations': 2,
+    'no-div-regex': 2,
+    'no-else-return': 2,
+    'no-empty-function': 2,
+    'no-empty-pattern': 2,
+    'no-eval': 2,
+    'no-extend-native': 2,
+    'no-extra-bind': 2,
+    'no-extra-label': 2,
+    'no-fallthrough': 2,
+    'no-floating-decimal': 2,
+    'no-implicit-coercion': [2, {
+      allow: ['!!'],
+    }],
+    'no-implicit-globals': 2,
+    'no-implied-eval': 2,
+    'no-invalid-this': 2,
+    'no-iterator': 2,
+    'no-labels': 2,
+    'no-lone-blocks': 2,
+    'no-loop-func': 2,
+    'no-magic-numbers': [1, {
+      ignore: [0, 1, -1],
+      ignoreArrayIndexes: true,
+      enforceConst: true
+    }],
+    'no-multi-spaces': 2,
+    'no-multi-str': 2,
+    'no-native-reassign': 2,
+    'no-new': 2,
+    'no-new-func': 2,
+    'no-new-wrappers': 2,
+    'no-octal': 2,
+    'no-octal-escape': 2,
+    'no-param-reassign': [2, {props: true}],
+    'no-proto': 2,
+    'no-redeclare': [2, {builtinGlobals: true}],
+    'no-return-assign': 2,
+    'no-script-url': 2,
+    'no-self-assign': 2,
+    'no-self-compare': 2,
+    'no-sequences': 2,
+    'no-throw-literal': 2,
+    'no-unmodified-loop-condition': 2,
+    'no-unused-expressions': 2,
+    'no-useless-call': 2,
+    'no-useless-concat': 2,
+    'no-useless-escape': 2,
+    'no-void': 2,
+    'no-warning-comments': 1,
+    'no-with': 2,
+    'radix': 2,
+    'wrap-iife': 2,
+    'yoda': 2,
 
-    "babel/object-shorthand": 1
+    // ESLint built-in 'Strict Mode' rules
+    'strict': 2,
+
+    // ESLint built-in 'Variables' rules
+    'init-declarations': 2,
+    'no-shadow': 2,
+    'no-shadow-restricted-names': 2,
+    'no-undef': 2,
+    'no-undef-init': 2,
+    'no-undefined': 2,
+    'no-use-before-define': 2,
+
+    // ESLint built-in 'Stylistic Issues' rules
+    // TODO
+
+
+
+    // ESLint built-in 'ECMAScript 6' rules
+    // TODO
+
+
+
+    // TODO: React plugin rules
+    'react/no-danger': 0,    // TODO: remove
+    'react/display-name': 0, // TODO: remove
+
+    // TODO: Babel plugin rules
+
+    // TODO: Import plugin rules
+
+    // TODO: jsx-a11y plugin rules
   }
 };
