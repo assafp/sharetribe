@@ -6,7 +6,8 @@ Promise.polyfill();
 const path = require('path');
 const webpack = require('webpack');
 const config = require('./webpack.client.base.config');
-const hotRailsPort = process.env.HOT_RAILS_PORT || 3500;
+const DEFAULT_PORT = 3500;
+const hotRailsPort = process.env.HOT_RAILS_PORT || DEFAULT_PORT;
 
 config.entry.app.push(
   `webpack-dev-server/client?http://lvh.me:${hotRailsPort}`,

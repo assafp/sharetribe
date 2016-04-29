@@ -19,7 +19,9 @@ import WebpackDevServer from 'webpack-dev-server';
 
 import webpackConfig from './webpack.client.rails.hot.config';
 
-const hotRailsPort = process.env.HOT_RAILS_PORT || 3500;
+const DEFAULT_PORT = 3500;
+
+const hotRailsPort = process.env.HOT_RAILS_PORT || DEFAULT_PORT;
 
 const compiler = webpack(webpackConfig);
 
@@ -41,8 +43,10 @@ const devServer = new WebpackDevServer(compiler, {
   },
 });
 
-devServer.listen(3500, 'lvh.me', err => {
-  if (err) console.error(err);
+devServer.listen(hotRailsPort, 'lvh.me', err => {
+  if (err) {
+    console.error(err);
+  }
   console.log(
     `=> 🔥  Webpack development server is running on port ${hotRailsPort}`
   );
