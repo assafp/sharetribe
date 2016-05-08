@@ -10,6 +10,7 @@ Do **not** write steps in imperative styles, instead write steps in declarative 
 
 A good question to ask yourself when writing a feature clause is: Will this wording need to change if the implementation does?
 
+
 **Don't**
 
 ```gherkin
