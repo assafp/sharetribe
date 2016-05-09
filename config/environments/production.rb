@@ -99,11 +99,22 @@ Kassi::Application.configure do
     }
   end
 
-  # Sendmail is used for some mails (e.g. Newsletter) so configure it even when smtp is the main method
-  ActionMailer::Base.sendmail_settings = {
-    :location       => '/usr/sbin/sendmail',
-    :arguments      => '-i -t'
+  config.action_mailer.smtp_settings = {
+      address: 'smtp.gmail.com',
+      port: 587,
+      domain: 'gmail.com',
+      user_name: 'om.free.spirit@gmail.com',
+      password: 'rewqfdsa',
+      authentication: 'plain',
+      enable_starttls_auto: true,
+      :openssl_verify_mode => 'none'  # This line added and it works fine
   }
+
+  # Sendmail is used for some mails (e.g. Newsletter) so configure it even when smtp is the main method
+  # ActionMailer::Base.sendmail_settings = {
+  #   :location       => '/usr/sbin/sendmail',
+  #   :arguments      => '-i -t'
+  # }
 
   ActionMailer::Base.perform_deliveries = true # the "deliver_*" methods are available
 end
