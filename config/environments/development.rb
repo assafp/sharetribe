@@ -54,16 +54,35 @@ Kassi::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
-  if APP_CONFIG.mail_delivery_method == "sendmail"
-    ActionMailer::Base.delivery_method = :sendmail
-  elsif APP_CONFIG.mail_delivery_method == "smtp"
-    # Enable sending mail from localhost
+  # if APP_CONFIG.mail_delivery_method == "sendmail"
+  #   ActionMailer::Base.delivery_method = :sendmail
+  # elsif APP_CONFIG.mail_delivery_method == "smtp"
+  #   # Enable sending mail from localhost
+  #   ActionMailer::Base.smtp_settings = {
+  #     :address              => APP_CONFIG.smtp_email_address,
+  #     :port                 => APP_CONFIG.smtp_email_port,
+  #     :domain               => APP_CONFIG.smtp_email_domain || 'localhost',
+  #     :user_name            => APP_CONFIG.smtp_email_user_name,
+  #     :password             => APP_CONFIG.smtp_email_password,
+  #     :authentication       => 'plain',
+  #     :enable_starttls_auto => true
+  #   }
+  # end
+
+  
+  config.action_mailer.raise_delivery_errors = true
+
+  mail_delivery_method = (APP_CONFIG.mail_delivery_method.present? ? APP_CONFIG.mail_delivery_method.to_sym : :smtp)
+
+  config.action_mailer.delivery_method = mail_delivery_method
+
+  if mail_delivery_method == :smtp
     ActionMailer::Base.smtp_settings = {
-      :address              => APP_CONFIG.smtp_email_address,
-      :port                 => APP_CONFIG.smtp_email_port,
-      :domain               => APP_CONFIG.smtp_email_domain || 'localhost',
-      :user_name            => APP_CONFIG.smtp_email_user_name,
-      :password             => APP_CONFIG.smtp_email_password,
+      :address              => 'smtp.gmail.com',
+      :port                 => 587,
+      :domain               => 'gmail.com',
+      :user_name            => 'om.free.spirit@gmail.com',
+      :password             => 'rewqfdsa',
       :authentication       => 'plain',
       :enable_starttls_auto => true
     }
