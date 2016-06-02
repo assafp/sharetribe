@@ -57,7 +57,6 @@ class Email < ActiveRecord::Base
   end
 
   def self.send_confirmation(email, community)
-    binding.pry
     MailCarrier.deliver_later(PersonMailer.email_confirmation(email, community))
   end
 
