@@ -8,7 +8,6 @@ class EmailsController < ApplicationController
 
   def send_confirmation
     logger.info "\n"*10 + "SENDING CONFIRMATION" + "\n"*10
-    binding.pry()
     @email = Email.find_by_id_and_person_id(params[:id], @current_user.id)
     if(@email.confirmed_at.present?)
       flash[:notice] = t("settings.account.email_already_confirmed")

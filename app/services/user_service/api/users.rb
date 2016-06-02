@@ -6,6 +6,7 @@ module UserService::API
     # TODO make people controller use this method too
     # The challenge for that is the devise connections
     def create_user(user_hash, community_id, invitation_id = nil)
+      print('creating user!')
 
       raise ArgumentError.new("Email #{user_hash[:email]} is already in use.") unless Email.email_available?(user_hash[:email], community_id)
 
