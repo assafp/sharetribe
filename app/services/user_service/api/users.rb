@@ -12,7 +12,9 @@ module UserService::API
 
       begin
         username = generate_username(user_hash[:given_name], user_hash[:family_name], community_id)
+        print username.inspect
         locale = user_hash[:locale] || APP_CONFIG.default_locale # don't access config like this, require to be passed in in ctor
+        print locale.inspect
 
         person = Person.new(
           given_name: user_hash[:given_name],
@@ -22,28 +24,39 @@ module UserService::API
           locale: locale,
           test_group_number: 1 + rand(4),
           community_id: community_id)
+        print person.inspect
 
         email = Email.new(person: person, address: user_hash[:email].downcase, send_notifications: true, community_id: community_id)
+        print email.inspect
 
         person.emails << email
         person.inherit_settings_from(Community.find(community_id)) if community_id
+
+        print person.emails.inspect
+        print community_id
 
         ActiveRecord::Base.transaction do
           person.save!
           person.set_default_preferences
 
           user = from_model(person)
+          print user.inspect
 
           # The first member will be made admin
           MarketplaceService::API::Memberships.make_user_a_member_of_community(user[:id], community_id, invitation_id)
 
           email = Email.find_by_person_id!(user[:id])
+          print email.inspect
           community = Community.find(community_id)
+          print community.inspect
+
 
           # send email confirmation (unless disabled for testing environment)
           if APP_CONFIG.skip_email_confirmation
+            print 'skipping!'
             email.confirm!
           else
+            print 'confirming!'
             Email.send_confirmation(email, community)
           end
 
